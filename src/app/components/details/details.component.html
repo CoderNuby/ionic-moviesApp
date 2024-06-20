@@ -1,0 +1,80 @@
+<ion-content>
+  <ion-label class="title">
+    <h1>{{movie?.title}}</h1>
+  </ion-label>
+  <img [src]="movie?.backdrop_path || '' | imagesUrl">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" class="poster-details-about">
+        <img [src]="movie?.poster_path || '' | imagesUrl" class="poster">
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon slot="start" name="thumbs-up" color="primary"></ion-icon>
+          <ion-label>Rating</ion-label>
+          <ion-note slot="end" color="primary">
+            {{movie?.vote_average}}
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="people-outline" color="primary"></ion-icon>
+          <ion-label>Votes</ion-label>
+          <ion-note slot="end" color="primary">
+            {{movie?.vote_count}}
+          </ion-note>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>{{movie?.overview}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-chip *ngFor="let genre of movie?.genres">
+          <ion-label>{{genre.name}}</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col>
+        <ion-label>Trailer</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <swiper-container>
+    <swiper-slide *ngFor="let video of movie?.videos?.results" [slidesPerView]="1.5">
+      <ion-col>
+        <i-card class="card-actor">
+          <strong>{{video.name}}</strong>
+        </i-card>
+        <iframe [src]="video.key | imagesYoutubeUrl" frameborder="0" allowfullscreen></iframe>
+      </ion-col>
+    </swiper-slide>
+  </swiper-container>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBackToHomePage()">
+          <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+          <ion-label>Go Back</ion-label>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="favorite()">
+          <ion-icon slot="end" [name]="isFavorite? 'trash-outline' : 'star-outline'"></ion-icon>
+          <ion-label>{{ isFavorite ? 'Remove' : 'Add Favorite' }}</ion-label>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

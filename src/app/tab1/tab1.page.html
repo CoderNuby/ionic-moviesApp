@@ -1,16 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Movies
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Movies</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col>
+        <h3>Popular Movies</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slide-show-poster (loadMore)="loadMorePopulariesMovies()" [movies]="getPopulariesMovies"></app-slide-show-poster>
   
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col>
+        <h3>Movies of this month</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slide-show-backdrop (loadMore)="loadMoreCurrentMonthMovies()" [movies]="moviesCurrentMonth"></app-slide-show-backdrop>
+
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col>
+        <h3>Movies</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slide-show-pairs (loadMore)="loadMoreMovies()" [movies]="movies"></app-slide-show-pairs>
 </ion-content>

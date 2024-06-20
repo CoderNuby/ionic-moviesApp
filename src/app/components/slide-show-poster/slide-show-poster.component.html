@@ -1,0 +1,12 @@
+<swiper-container #swiperContainer  observer="true" observeParents="true">
+  <swiper-slide *ngFor="let movie of movies">
+    <i-card (click)="viewDetails(movie.id)">
+      <ion-img [src]="movie.poster_path | imagesUrl"></ion-img>
+    </i-card>
+  </swiper-slide>
+  <swiper-slide *ngIf="showMore">
+    <ion-button class="btn-more" expand="full" (click)="loadMovies()">
+      Load movies <ion-icon name="add" slot="icon-only"></ion-icon>
+    </ion-button>
+  </swiper-slide>
+</swiper-container>
